@@ -91,6 +91,37 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        if showType != ShowTextFieldType.Password {
+            showType = ShowTextFieldType.Username
+            return
+        }
+        showType = ShowTextFieldType.Username
+        self.showAnimation()
+    }
+    
+    
+    // MARK: private method
+    func showAnimation() {
+        UIView.animate(withDuration: 0.35, animations: {
+            // 左手掌
+            self.leftHandImage.frame = CGRect(x: self.leftHandImage.x - 60,
+                                              y: self.leftHandImage.y + 30,
+                                              width: self.leftHandImage.w,
+                                              height: self.leftHandImage.h)
+            // 右手掌
+            self.rightHandImage.frame = CGRect(x: self.rightHandImage.x + 55,
+                                               y: self.rightHandImage.y + 30,
+                                               width: self.rightHandImage.w,
+                                               height: self.rightHandImage.h)
+            // 左拳头
+            self.leftFistImage.frame = CGRect(x: self.leftFistImage.x - 70,
+                                              y: self.leftFistImage.y,
+                                              width: 40, height: 40)
+            // 右拳头
+            self.rightFistImage.frame = CGRect(x: self.rightFistImage.x + 30,
+                                               y: self.rightFistImage.y,
+                                               width: 40, height: 40)
+        })
     }
     
     // MARK: 控件懒加载
@@ -119,7 +150,7 @@ class ViewController: UIViewController {
         return leftHandImage
     }()
     
-    lazy var  rightHandImage: UIImageView = {
+    lazy var rightHandImage: UIImageView = {
         let rightHandImage = UIImageView()
         rightHandImage.frame = CGRect(x: self.headerImgView.w * 0.5 + 65, y: 90, width: 40, height: 65)
         rightHandImage.image = UIImage(named: "owl-login-arm-right")
@@ -142,13 +173,12 @@ class ViewController: UIViewController {
 }
 
 
+
 // MARK: - UITextFieldDelegate
 extension ViewController: UITextFieldDelegate {
     
     /// became first responder
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        // print("\(textField)")
         
         if textField.isEqual(self.usernameField) {
             
@@ -158,26 +188,8 @@ extension ViewController: UITextFieldDelegate {
             }
             showType = ShowTextFieldType.Username
             
-            UIView.animate(withDuration: 0.35, animations: {
-                // 左手掌
-                self.leftHandImage.frame = CGRect(x: self.leftHandImage.x - 60,
-                                                  y: self.leftHandImage.y + 30,
-                                                  width: self.leftHandImage.w,
-                                                  height: self.leftHandImage.h)
-                // 右手掌
-                self.rightHandImage.frame = CGRect(x: self.rightHandImage.x + 55,
-                                                   y: self.rightHandImage.y + 30,
-                                                   width: self.rightHandImage.w,
-                                                   height: self.rightHandImage.h)
-                // 左拳头
-                self.leftFistImage.frame = CGRect(x: self.leftFistImage.x - 70,
-                                                  y: self.leftFistImage.y,
-                                                  width: 40, height: 40)
-                // 右拳头
-                self.rightFistImage.frame = CGRect(x: self.rightFistImage.x + 30,
-                                                   y: self.rightFistImage.y,
-                                                   width: 40, height: 40)
-            })
+            self.showAnimation()
+            
         } else if textField.isEqual(self.passwordField) {
             
             if showType == ShowTextFieldType.Password {
@@ -216,6 +228,14 @@ extension ViewController: UITextFieldDelegate {
             self.passwordField.becomeFirstResponder()
         } else {
             self.passwordField.resignFirstResponder()
+            
+            if showType != ShowTextFieldType.Password {
+                showType = ShowTextFieldType.Username
+                return true
+            }
+            showType = ShowTextFieldType.Username
+            
+            self.showAnimation()
         }
         return true
     }
