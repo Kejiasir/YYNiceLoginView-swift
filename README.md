@@ -1,16 +1,13 @@
 # YYNiceLoginView-swift
 
-### 昨天看到这个[JxbLovelyLogin](https://github.com/JxbSir/JxbLovelyLogin)挺好玩的, 于是用swift来练手写了一个
-
-* 数据库和
-
-	* 时刻发</r>
+### 昨天看到这个[JxbLovelyLogin](https://github.com/JxbSir/JxbLovelyLogin)挺有意思的, 刚好最近在看swift, 于是拿来练手写了一个, O(∩_∩)O哈哈哈~
+ 
 	
-### 屏幕快照 
+### Screenshot 
 <table>
 <tr>
 <td>
-<img src = "http://ww1.sinaimg.cn/mw690/006vCCgygw1f99zfrftm7j30pi0zkq7q.jpg" width = "300" title = "屏幕截图"/>
+<img src = "Screenshot.gif" width = "300" title = "屏幕快照"/>
 </td>
 </tr>
 </table>
